@@ -1,11 +1,11 @@
 import express from 'express';
 const app = express();
-const port = 3000;
+const puerto = process.env.PUERTO || 3030
 
-app.get("/", (_, res) => {
+app.get("/", function(req, res){
   res.send(`Hola, estoy aprendiendo express, ficha 3407181 programa ADSO`);
 });
 
-app.listen(port, () => {
-  console.log(`Servidor en funcionamiento en el puerto: ${port}`);
+app.listen(puerto, () => {
+  console.log(`Servidor en funcionamiento en el puerto: ${puerto}`);
 });
