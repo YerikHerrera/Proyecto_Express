@@ -9,7 +9,34 @@ const puerto = process.env.PUERTO || 3000
 app.get("/", function(req, res){
   res.send(`Hola, estoy aprendiendo express, ficha 3407181 programa ADSO, 31 de julio`);
 });
+//otro endpoint
+app.get("/otraruta", (req, res)=>{
+  //usando template string
+  res.send(`<h1>Otro ejemplo de ruta</h1>
+    <h2>End point con res.send</h2>
+    `);
+});
 
-app.listen(puerto, () => {
-  console.log(`Servidor en funcionamiento en el puerto: ${puerto}`);
+app.get("/ruta2", (req, res)=>{
+  res.json({"nombre": "Yerik", "Apellido": "Herrera", "Cargo": "Aprendiz"})
+});
+
+app.get("/ruta3/:aprendiz/:otrodato", (req, res)=>{
+  const dato_aprendiz = req.params.aprendiz
+  const otro_dato = req.params.otrodato
+  res.json({"nombre": dato_aprendiz, "Otro": otro_dato})
+});
+
+app.get("/ruta4", (req, res)=>{
+  //capturar el parametro de consulta query
+  const orden = req.query.orden || "sin ordenar"
+  const pagina = req.query.pagina || 1
+  res.send(`<h1>Listado Aprendices</h1>
+    <p>El listado esta en orden ${orden}</p>
+    <p>Pagina: ${pagina}</p>
+    `);
+});
+
+app.listen(puerto, function(){
+  console.log(`SERVIDOR: http://localhost:${puerto}`);
 });
