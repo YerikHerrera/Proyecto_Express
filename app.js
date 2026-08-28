@@ -7,6 +7,7 @@ const app = express();
 const puerto = process.env.PORT || 3000
 //uso de middleware body-parse
 app.use(express.json())
+app.use(express.urlencoded({extend:true}))
 
 
 app.get("/", function(req, res){
@@ -69,6 +70,20 @@ app.post("/login", (req, res)=>{
   res.send("Perfil inexistente. Acceso denegado.")
 })
 
+//endpoint para enviar datos formdata
+app.post("/formulario", (req, res)=>{
+    const datosForm = req.body
+    const miNombre = req.body.usuario
+    const miPerfil = req.body.perfil
+    const miContraseña = req.body.contraseña
+
+    if (!miNombre || !miPerfil || !miContraseña){
+    return res.send("Faltan datos por llenar.")
+  }
+    res.status(200).json({
+        Mensaje: "Datos recibidos", nombre: miNombre, perfil: miPerfil, contraseña: miContraseña})
+})
+
 app.listen(puerto, function(){
-  console.log(`SERVIDOR: http://localhost:${puerto}`);
-});
+  console.log(`SERVIDOR: http://localhost:${puerto}`)
+})
