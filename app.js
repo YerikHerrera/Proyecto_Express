@@ -4,11 +4,15 @@ import {configDotenv} from "dotenv"
 configDotenv()
 
 const app = express();
-const puerto = process.env.PUERTO || 3000
+const puerto = process.env.PORT || 3000
+//uso de middleware body-parse
+app.use(express.json())
+
 
 app.get("/", function(req, res){
   res.send(`Hola, estoy aprendiendo express, ficha 3407181 programa ADSO, 31 de julio`);
 });
+
 //otro endpoint
 app.get("/otraruta", (req, res)=>{
   //usando template string
@@ -36,6 +40,14 @@ app.get("/ruta4", (req, res)=>{
     <p>Pagina: ${pagina}</p>
     `);
 });
+
+//endpoint para envio de datos formato json
+app.post("/ruta2",(req, res)=>{
+    const todosDatos = req.body
+    const name = req.body.nombre
+    const lastname = req.body.cargo
+    res.status(201).json({Datos: todosDatos, nombre: name, cargo: lastname})
+})
 
 app.listen(puerto, function(){
   console.log(`SERVIDOR: http://localhost:${puerto}`);
