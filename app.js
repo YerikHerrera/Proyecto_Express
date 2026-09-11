@@ -8,7 +8,18 @@ const ruta = require("path")
 const rutaArchivoJson = ruta.join(__dirname, "datos.json")
 //importar libreria para subir archivos
 const multer = require("multer")
+//configurar almacenamiento
+const almacenamiento = multer.diskStorage({
+  destination: (req, file, cb)=>{
+    cb(null, "misImagenes/")
+  },
+  filename: (req, file, cb)=>{
+    const extensionArchivo = ruta.extname(file.originalname)
+    cb(null, `${Date.now()}${extensionArchivo}`)
+  }
+})
 
+const subirArchivo = multer({storage: almacenamiento})
 
 //middleware body-parse, formatea los datos enviados
 app.use(express.json())
@@ -32,9 +43,10 @@ app.get("/api/aprendices", (req, res)=>{
 })
 
 //endpoint para crear aprendices
-app.post("/api/aprendices", (req,res)=>{
+app.post("/api/aprendices", subirArchivo.single("imagen"), (req,res)=>{
   //validar que se envien los datos
   const nuevoAprendiz = req.body
+  nuevoAprendiz.imagen = req.file?`/misImagenes/${req.file.filename}`:"Sin imagen"
   //utilizamos la lectura del archivo
   sistemaArchivo.readFile(rutaArchivoJson, "utf-8", (error, datos)=>{
     if (error){

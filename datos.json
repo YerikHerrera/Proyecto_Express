@@ -38,5 +38,15 @@
     "nombre": "juan",
     "perfil": "instructor",
     "correo": "juan@example.com"
+  },
+  {
+    "Imagen": "/misImagenes/1789139662722.png"
+  },
+  {
+    "dni": "6",
+    "nombre": "Yerik",
+    "apellido": "Herrera",
+    "correo": "yerikh@gmail.com",
+    "Imagen": "/misImagenes/1789139882826.png"
   }
 ]
