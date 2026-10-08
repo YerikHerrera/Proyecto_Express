@@ -10,12 +10,12 @@ const rutaArchivoJson = ruta.join(__dirname, "datos.json")
 const multer = require("multer")
 const jwt = require("jsonwebtoken")
 //importacion de middleware personales
-const registroMiddleware = require("./middleware/registroMiddleware")
-const manejadorErrores = require("./middleware/manejoErrores")
-const autenticarMiddleware = require("./middleware/autenticarMiddleware")
+const registroMiddleware = require("./src/middleware/registroMiddleware")
+const manejadorErrores = require("./src/middleware/manejoErrores")
+const autenticarMiddleware = require("./src/middleware/autenticarMiddleware")
 
 //importar validaciones
-const {validarNombre, validarCorreo, generarId} = require("./utilidades/validaciones")
+const {validarNombre, validarCorreo, generarId} = require("./src/utilidades/validaciones")
 //configurar almacenamiento
 const almacenamiento = multer.diskStorage({
   destination: (req, file, cb)=>{
