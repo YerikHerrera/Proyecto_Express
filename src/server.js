@@ -1,3 +1,4 @@
+require('dotenv').config();
 const miApp = require("./app")
 const PUERTO = process.env.PUERTO || 3333
 

@@ -16,4 +16,32 @@ const crear = async (email, username, clave, foto)=>{
     return userNew
 }
 
-module.exports = {listar, crear}
+
+const actualizar = async (id, email, username, clave, foto) => {
+    const usuarioActualizado = await ormPrisma.usuarios.update({
+        where: { id: Number(id) },
+        data: {
+            email: email,
+            username: username,
+            clave: clave,
+            foto: foto
+        }
+    })
+    return usuarioActualizado
+}
+
+const eliminar = async (id) => {
+    const usuarioEliminado = await ormPrisma.usuarios.delete({
+        where: { id: Number(id) }
+    })
+    return usuarioEliminado
+}
+
+const listarUsuario = async (id) => {
+    const usuario = await ormPrisma.usuarios.findUnique({
+        where: { id: Number(id) }
+    })
+    return usuario
+}
+
+module.exports = {listar, crear, actualizar, eliminar, listarUsuario}
