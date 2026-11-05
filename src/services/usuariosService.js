@@ -1,8 +1,8 @@
 //utilizar prisma
 const ormPrisma = require("../config/conexion")
-const listar = async ()=>{
-    const datos = ormPrisma.usuarios.findMany
-    return datos 
+const listar = async () => {
+    const datos = await ormPrisma.usuarios.findMany()
+    return datos
 }
 
 
